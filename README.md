@@ -1,5 +1,7 @@
 # Reedesy coding challenge
 
+You can read about me in the file AboutMySelf in the root directory
+
 Ruby version - `3.2.2`
 Rails version - `7.1.0.alpha`
 
@@ -48,3 +50,5 @@ to cover this situation for task
     `4% discount for 20 to 29 items`
     `... (and so forth with discounts increasing in steps of 2%)`
     `30% discount for 150 or more items`
+
+
