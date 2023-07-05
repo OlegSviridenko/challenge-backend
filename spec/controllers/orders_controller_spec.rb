@@ -38,7 +38,7 @@ describe ProductsController, type: :request do
         post order_path, params: params
 
         expect(response.status).to eq 422
-        expect(JSON.parse(response.body)['message']).to eq 'Bad Request'
+        expect(JSON.parse(response.body)['message']).to eq "Invalid errors list"
       end
     end
 

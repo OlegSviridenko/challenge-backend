@@ -17,7 +17,7 @@ class TotalPriceCalculator
 
       discount_multiplier = product_discount.positive? ? (1 - product_discount / 100.0) : 1
       @value += (product.price * count(product).to_i * discount_multiplier)
-    end
+    end unless errors.any?
   end
 
   private
@@ -27,8 +27,13 @@ class TotalPriceCalculator
 
   def fetch_products(products_list)
     @products_hash = products_list.split(', ').map(&:split).inject({}) do |hash, array|
-      hash[array.last] = array.first
-      hash
+      if array.size != 2
+        errors << invalid_product_list_error
+        break
+      else
+        hash[array.last] = array.first
+        hash
+      end
     end
   end
 
@@ -55,5 +60,9 @@ class TotalPriceCalculator
     "Your discount formula for #{product.code} is invalid please use only digits, math operators \
     like '() + - / *' and condition operators like 'if ? : || < > <= >= ==' \
     and use '#{Discount::COUNT_VARIABLE}' to indicate count of products"
+  end
+
+  def invalid_product_list_error
+    'Invalid errors list'
   end
 end
