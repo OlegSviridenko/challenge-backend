@@ -27,7 +27,7 @@ class TotalPriceCalculator
 
   def fetch_products(products_list)
     @products_hash = products_list.split(', ').map(&:split).inject({}) do |hash, array|
-      if array.size != 2
+      if array.size != 2 || (array.first.to_i.zero? && array.first != '0')
         errors << invalid_product_list_error
         break
       else
